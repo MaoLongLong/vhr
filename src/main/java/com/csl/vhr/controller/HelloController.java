@@ -15,4 +15,14 @@ public class HelloController {
         return "Hello World";
     }
 
+    @GetMapping("/employee/basic/hello")
+    public String emp() {
+        return "Hello emp";
+    }
+
+    @GetMapping("/system/basic/hello")
+    public String sys() {
+        return "Hello sys";
+    }
+
 }

@@ -33,6 +33,13 @@
             </association>
         </collection>
     </resultMap>
+    <resultMap id="MenuWithRole" type="Menu" extends="BaseResultMap">
+        <collection property="roles" ofType="Role">
+            <id property="id" column="r_id"/>
+            <result property="name" column="r_name"/>
+            <result property="nameZh" column="r_nameZh"/>
+        </collection>
+    </resultMap>
     <select id="selectMenusByHrId" resultMap="One2ManyResultMap">
         SELECT DISTINCT m1.id,
                         m1.path,
@@ -64,5 +71,24 @@
         ORDER BY m1.id,
                  m2.id;
     </select>
-
+    <select id="selectMenusWithRoles" resultMap="MenuWithRole">
+        SELECT m.id,
+               m.url,
+               m.path,
+               m.component,
+               m.name,
+               m.iconCls,
+               m.keepAlive,
+               m.requireAuth,
+               m.parentId,
+               m.enabled,
+               r.id     r_id,
+               r.name   r_name,
+               r.nameZh r_nameZh
+        FROM menu m,
+             menu_role mr,
+             role r
+        WHERE m.id = mr.mid
+          AND mr.rid = r.id
+    </select>
 </mapper>

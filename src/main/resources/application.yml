@@ -12,5 +12,16 @@ spring:
   jackson:
     default-property-inclusion: non_null
 
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+  cache:
+    cache-names:
+      - menu
+    redis:
+      time-to-live: 1M
+
 mybatis-plus:
   type-aliases-package: com.csl.vhr.entity

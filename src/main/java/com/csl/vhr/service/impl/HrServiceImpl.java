@@ -1,6 +1,5 @@
 package com.csl.vhr.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.csl.vhr.entity.Hr;
 import com.csl.vhr.mapper.HrMapper;
@@ -31,9 +30,7 @@ public class HrServiceImpl extends ServiceImpl<HrMapper, Hr> implements HrServic
             throw new UsernameNotFoundException("用户名不存在");
         }
 
-        Hr hr = hrMapper.selectOne(Wrappers
-                .<Hr>lambdaQuery()
-                .eq(Hr::getUsername, username));
+        Hr hr = hrMapper.getHrByUsernameWithRole(username);
 
         if (hr == null) {
             throw new UsernameNotFoundException("用户名不存在");

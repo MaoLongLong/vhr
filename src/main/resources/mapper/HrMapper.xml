@@ -16,4 +16,31 @@
         <result column="remark" property="remark"/>
     </resultMap>
 
+    <resultMap id="HrWithRole" type="Hr" extends="BaseResultMap">
+        <collection property="roles" ofType="Role">
+            <id property="id" column="r_id"/>
+            <result property="name" column="r_name"/>
+            <result property="nameZh" column="r_nameZh"/>
+        </collection>
+    </resultMap>
+
+    <select id="getHrByUsernameWithRole" resultMap="HrWithRole">
+        SELECT h.id,
+               h.name,
+               h.phone,
+               h.telephone,
+               h.address,
+               h.enabled,
+               h.username,
+               h.password,
+               h.avatar,
+               h.remark,
+               r.id     r_id,
+               r.name   r_name,
+               r.nameZh r_nameZh
+        FROM hr h
+                 LEFT JOIN hr_role h_r ON h.id = h_r.hrid
+                 LEFT JOIN role r ON h_r.rid = r.id
+        WHERE h.username = #{username}
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import com.csl.vhr.entity.Menu;
 import com.csl.vhr.mapper.MenuMapper;
 import com.csl.vhr.service.MenuService;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<Menu> getMenusByHrId(Integer id) {
         return menuMapper.selectMenusByHrId(id);
+    }
+
+    @Override
+    @Cacheable(cacheNames = "menu")
+    public List<Menu> getMenusWithRoles() {
+        return menuMapper.selectMenusWithRoles();
     }
 
 }
