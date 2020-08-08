@@ -4,7 +4,6 @@ import com.csl.vhr.entity.Hr;
 import com.csl.vhr.entity.RespBean;
 import com.csl.vhr.filter.JsonAuthenticationFilter;
 import com.csl.vhr.service.HrService;
-import com.csl.vhr.util.Constants;
 import com.csl.vhr.util.NonNullObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,21 +59,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
 
+                //没有认证时，在这里处理结果，不要重定向
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, e) -> {
+                            response.setContentType("application/json;charset=utf-8");
+                            response.setStatus(401);
+                            PrintWriter out = response.getWriter();
+                            RespBean respBean = RespBean.builder().status(401).msg("未认证").build();
+                            out.write(new NonNullObjectMapper().writeValueAsString(respBean));
+                            out.flush();
+                            out.close();
+                        }
+                )
 
                 .and()
                 .logout()
                 .logoutSuccessHandler((request, response, authentication) -> {
-                    response.setContentType(Constants.ContentType.APPLICATION_JSON_UTF8);
+                    response.setContentType("application/json;charset=utf-8");
                     PrintWriter out = response.getWriter();
                     out.write(new NonNullObjectMapper().writeValueAsString(
                             RespBean.ok("注销成功")));
                     out.flush();
                     out.close();
                 })
+                .permitAll()
 
                 .and()
                 .csrf().disable();
@@ -87,7 +96,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         JsonAuthenticationFilter filter = new JsonAuthenticationFilter();
 
         filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
-            response.setContentType(Constants.ContentType.APPLICATION_JSON_UTF8);
+            response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();
             Hr hr = (Hr) authentication.getPrincipal();
             hr.setPassword(null);
@@ -98,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         });
 
         filter.setAuthenticationFailureHandler((request, response, e) -> {
-            response.setContentType(Constants.ContentType.APPLICATION_JSON_UTF8);
+            response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();
             RespBean resp = RespBean.error("");
             if (e instanceof BadCredentialsException) {
@@ -124,6 +133,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         } catch (Exception e) {
             log.error(e.toString());
         }
+
+        filter.setFilterProcessesUrl("/login");
 
         return filter;
     }

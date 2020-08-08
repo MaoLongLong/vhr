@@ -1,7 +1,6 @@
 package com.csl.vhr.filter;
 
 import com.csl.vhr.entity.LoginBean;
-import com.csl.vhr.util.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -25,12 +24,12 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        if (!Constants.RequestMethod.POST.equals(request.getMethod())) {
+        if (!"POST".equals(request.getMethod())) {
             throw new AuthenticationServiceException(
                     "Authentication method not supported: " + request.getMethod());
         }
-        if (Constants.ContentType.APPLICATION_JSON.equals(request.getContentType())
-                || Constants.ContentType.APPLICATION_JSON_UTF8.equals(request.getContentType())) {
+        if ("application/json".equals(request.getContentType())
+                || "application/json;charset=UTF-8".equals(request.getContentType())) {
 
             String username;
             String password;

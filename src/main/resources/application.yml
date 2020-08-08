@@ -1,6 +1,7 @@
 server:
   port: 8081
 
+
 spring:
   datasource:
     username: root
@@ -8,6 +9,24 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///vhr?useServerPrepStmts=true&useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     type: com.alibaba.druid.pool.DruidDataSource
+
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      pool-prepared-statements: false
+      validation-query: SELECT 'X'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      filters: stat,wall
+      web-stat-filter:
+        enabled: true
+      stat-view-servlet:
+        enabled: true
 
   jackson:
     default-property-inclusion: non_null

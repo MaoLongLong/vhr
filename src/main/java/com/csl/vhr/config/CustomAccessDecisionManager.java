@@ -21,6 +21,11 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection)
             throws AccessDeniedException, InsufficientAuthenticationException {
+
+        if (collection == null) {
+            return;
+        }
+
         for (ConfigAttribute configAttribute : collection) {
             String attribute = configAttribute.getAttribute();
             if ("ROLE_LOGIN".equals(attribute)) {
