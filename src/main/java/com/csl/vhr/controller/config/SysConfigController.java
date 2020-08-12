@@ -1,4 +1,4 @@
-package com.csl.vhr.controller;
+package com.csl.vhr.controller.config;
 
 import com.csl.vhr.entity.Menu;
 import com.csl.vhr.service.MenuService;
