@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,6 +57,15 @@ public class PositionController {
     @DeleteMapping("/{id}")
     public RespBean deletePosition(@PathVariable("id") Integer id) {
         boolean ok = positionService.removeById(id);
+        if (ok) {
+            return RespBean.ok("删除成功");
+        }
+        return RespBean.error("删除失败");
+    }
+
+    @DeleteMapping("")
+    public RespBean deletePositionsByIds(@RequestBody Integer[] ids) {
+        boolean ok = positionService.removeByIds(Arrays.asList(ids));
         if (ok) {
             return RespBean.ok("删除成功");
         }

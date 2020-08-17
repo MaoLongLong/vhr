@@ -1,7 +1,7 @@
 package com.csl.vhr.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.csl.vhr.entity.Joblevel;
+import com.csl.vhr.entity.JobLevel;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.csl.vhr.entity.Joblevel;
  * @author MaoLongLong
  * @since 2020-08-05
  */
-public interface JoblevelMapper extends BaseMapper<Joblevel> {
+public interface JoblevelMapper extends BaseMapper<JobLevel> {
 
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.csl.vhr.mapper.JoblevelMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.csl.vhr.entity.Joblevel">
+    <resultMap id="BaseResultMap" type="com.csl.vhr.entity.JobLevel">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="titleLevel" property="titleLevel"/>

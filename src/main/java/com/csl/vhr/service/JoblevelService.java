@@ -1,7 +1,7 @@
 package com.csl.vhr.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.csl.vhr.entity.Joblevel;
+import com.csl.vhr.entity.JobLevel;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.csl.vhr.entity.Joblevel;
  * @author MaoLongLong
  * @since 2020-08-05
  */
-public interface JoblevelService extends IService<Joblevel> {
+public interface JoblevelService extends IService<JobLevel> {
 
 }

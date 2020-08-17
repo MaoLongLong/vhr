@@ -1,5 +1,6 @@
 package com.csl.vhr.config;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -25,8 +26,16 @@ public class LocalDateTimeSerializerConfig {
     }
 
     @Bean
+    public LocalDateTimeDeserializer localDateTimeDeserializer() {
+        return new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-        return builder -> builder.serializerByType(LocalDateTime.class, localDateTimeSerializer());
+        return builder -> {
+            builder.serializerByType(LocalDateTime.class, localDateTimeSerializer());
+            builder.deserializerByType(LocalDateTime.class, localDateTimeDeserializer());
+        };
     }
 
 }
