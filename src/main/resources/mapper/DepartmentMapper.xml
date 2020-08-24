@@ -12,4 +12,15 @@
         <result column="isParent" property="isParent"/>
     </resultMap>
 
+    <resultMap id="DepartmentWithChildren" type="com.csl.vhr.entity.Department" extends="BaseResultMap">
+        <collection property="children" ofType="com.csl.vhr.entity.Department"
+                    select="getAllDepartmentByParentId" column="id"/>
+    </resultMap>
+
+    <select id="getAllDepartmentByParentId" resultMap="DepartmentWithChildren">
+        SELECT id, name, parentId, depPath, enabled, isParent
+        FROM department
+        WHERE parentId = #{id}
+    </select>
+
 </mapper>

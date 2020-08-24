@@ -28,4 +28,11 @@ public interface MenuMapper extends BaseMapper<Menu> {
      */
     List<Menu> selectMenusWithRoles();
 
+    /**
+     * 返回包含子菜单的菜单列表
+     * @return 菜单列表
+     */
+    List<Menu> selectMenusWithChildren();
+
+    List<Integer> selectMenuIdsByRoleId(Integer id);
 }

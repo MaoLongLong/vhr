@@ -11,6 +11,6 @@ import com.csl.vhr.entity.JobLevel;
  * @author MaoLongLong
  * @since 2020-08-05
  */
-public interface JoblevelService extends IService<JobLevel> {
+public interface JobLevelService extends IService<JobLevel> {
 
 }

@@ -16,8 +16,8 @@
         <result column="remark" property="remark"/>
     </resultMap>
 
-    <resultMap id="HrWithRole" type="Hr" extends="BaseResultMap">
-        <collection property="roles" ofType="Role">
+    <resultMap id="HrWithRole" type="com.csl.vhr.entity.Hr" extends="BaseResultMap">
+        <collection property="roles" ofType="com.csl.vhr.entity.Role">
             <id property="id" column="r_id"/>
             <result property="name" column="r_name"/>
             <result property="nameZh" column="r_nameZh"/>
@@ -42,5 +42,24 @@
                  LEFT JOIN hr_role h_r ON h.id = h_r.hrid
                  LEFT JOIN role r ON h_r.rid = r.id
         WHERE h.username = #{username}
+    </select>
+
+    <select id="selectAllWithRole" resultMap="HrWithRole">
+        select h.id,
+               h.name,
+               h.phone,
+               h.telephone,
+               h.address,
+               h.enabled,
+               h.username,
+               h.avatar,
+               h.remark,
+               r.id     r_id,
+               r.name   r_name,
+               r.nameZh r_nameZh
+        from hr h
+                 left join hr_role h_r on h.id = h_r.hrid
+                 left join role r on h_r.rid = r.id
+        where h.id != #{id}
     </select>
 </mapper>

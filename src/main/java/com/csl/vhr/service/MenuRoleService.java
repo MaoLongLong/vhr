@@ -13,4 +13,6 @@ import com.csl.vhr.entity.MenuRole;
  */
 public interface MenuRoleService extends IService<MenuRole> {
 
+    boolean updateMenuRole(Integer id, Integer[] ids);
+
 }

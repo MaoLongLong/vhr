@@ -25,14 +25,25 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     private final MenuMapper menuMapper;
 
     @Override
+    @Cacheable(cacheNames = "menus_by_hr_id")
     public List<Menu> getMenusByHrId(Integer id) {
         return menuMapper.selectMenusByHrId(id);
     }
 
     @Override
-    @Cacheable(cacheNames = "menu")
+    @Cacheable(cacheNames = "menus_with_roles")
     public List<Menu> getMenusWithRoles() {
         return menuMapper.selectMenusWithRoles();
+    }
+
+    @Override
+    public List<Menu> getMenusWithChildren() {
+        return menuMapper.selectMenusWithChildren();
+    }
+
+    @Override
+    public List<Integer> getMenuIdsByRoleId(Integer id) {
+        return menuMapper.selectMenuIdsByRoleId(id);
     }
 
 }

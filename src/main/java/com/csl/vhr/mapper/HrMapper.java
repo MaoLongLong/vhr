@@ -3,6 +3,8 @@ package com.csl.vhr.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.csl.vhr.entity.Hr;
 
+import java.util.List;
+
 /**
  * <p>
  * Mapper 接口
@@ -20,4 +22,5 @@ public interface HrMapper extends BaseMapper<Hr> {
      */
     Hr getHrByUsernameWithRole(String username);
 
+    List<Hr> selectAllWithRole(Integer id);
 }

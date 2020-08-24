@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.csl.vhr.entity.Hr;
 import com.csl.vhr.mapper.HrMapper;
 import com.csl.vhr.service.HrService;
+import com.csl.vhr.util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * <p>
@@ -39,4 +42,8 @@ public class HrServiceImpl extends ServiceImpl<HrMapper, Hr> implements HrServic
         return hr;
     }
 
+    @Override
+    public List<Hr> getAll() {
+        return hrMapper.selectAllWithRole(SecurityUtils.currentUser().getId());
+    }
 }

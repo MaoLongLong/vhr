@@ -31,9 +31,6 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         String url = ((FilterInvocation) o).getRequestUrl();
         AntPathMatcher matcher = new AntPathMatcher();
-        if (matcher.match("/druid/**", url)) {
-            return null;
-        }
         List<Menu> menus = menuService.getMenusWithRoles();
         for (Menu menu : menus) {
             if (matcher.match(menu.getUrl(), url)) {

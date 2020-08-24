@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.csl.vhr.entity.Hr;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务类
@@ -14,4 +16,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface HrService extends IService<Hr>, UserDetailsService {
 
+    List<Hr> getAll();
 }

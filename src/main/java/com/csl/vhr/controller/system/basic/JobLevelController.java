@@ -1,9 +1,9 @@
-package com.csl.vhr.controller;
+package com.csl.vhr.controller.system.basic;
 
 
 import com.csl.vhr.entity.JobLevel;
 import com.csl.vhr.entity.RespBean;
-import com.csl.vhr.service.JoblevelService;
+import com.csl.vhr.service.JobLevelService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +22,9 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/system/basic/jl")
-public class JoblevelController {
+public class JobLevelController {
 
-    private final JoblevelService jobLevelService;
+    private final JobLevelService jobLevelService;
 
     @GetMapping("")
     public List<JobLevel> getAllJobLevels() {

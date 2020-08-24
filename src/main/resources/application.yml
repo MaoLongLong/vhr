@@ -16,9 +16,17 @@ spring:
 
   cache:
     cache-names:
-      - menu
+      - menus_by_hr_id
+      - menus_with_roles
     redis:
       time-to-live: 1M
 
+  jackson:
+    default-property-inclusion: non_null
+
 mybatis-plus:
   type-aliases-package: com.csl.vhr.entity
+
+logging:
+  level:
+    com.csl.vhr.mapper: trace

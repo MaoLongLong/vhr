@@ -11,6 +11,6 @@ import com.csl.vhr.entity.JobLevel;
  * @author MaoLongLong
  * @since 2020-08-05
  */
-public interface JoblevelMapper extends BaseMapper<JobLevel> {
+public interface JobLevelMapper extends BaseMapper<JobLevel> {
 
 }
