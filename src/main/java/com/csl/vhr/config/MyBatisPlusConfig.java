@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @MapperScan(basePackages = "com.csl.vhr.mapper")
-public class MyBatisConfig {
+public class MyBatisPlusConfig {
 
     @Bean
     public PaginationInterceptor paginationInterceptor() {

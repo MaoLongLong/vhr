@@ -1,7 +1,7 @@
 package com.csl.vhr.filter;
 
-import com.csl.vhr.entity.LoginBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +21,11 @@ import java.io.Reader;
 @Slf4j
 public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    @Data
+    static class LoginBean {
+        private String username;
+        private String password;
+    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
