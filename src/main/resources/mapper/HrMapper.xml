@@ -61,5 +61,6 @@
                  left join hr_role h_r on h.id = h_r.hrid
                  left join role r on h_r.rid = r.id
         where h.id != #{id}
+        order by h.id, r.id
     </select>
 </mapper>

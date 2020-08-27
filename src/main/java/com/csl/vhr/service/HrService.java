@@ -17,4 +17,6 @@ import java.util.List;
 public interface HrService extends IService<Hr>, UserDetailsService {
 
     List<Hr> getAll();
+
+    boolean updateHrRoles(Integer id, Integer[] roleIds);
 }
